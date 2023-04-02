@@ -3,15 +3,12 @@ from dash import Dash, Input, Output, dcc, html
 
 from inflation_dashboard.dash.src.all_categories_tab import all_content
 from inflation_dashboard.dash.src.core_and_headline_tab import headline_and_core_content
-
 from inflation_dashboard.dash.src.edu_tab import edu_content
-
 from inflation_dashboard.dash.src.energy_tab import energy_content
 from inflation_dashboard.dash.src.food_tab import food_content
 from inflation_dashboard.dash.src.housing_tab import housing_content
 from inflation_dashboard.dash.src.medical_tab import medical_content
 from inflation_dashboard.dash.src.overview_tab import overview_content
-
 
 app = Dash(__name__, external_stylesheets=[dbc.themes.YETI])
 server = app.server

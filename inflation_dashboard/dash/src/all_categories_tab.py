@@ -3,15 +3,12 @@
 import dash_bootstrap_components as dbc
 from dash import dcc, html
 
+from inflation_dashboard import cpi_series_column_name, inflation_long_df
 from inflation_dashboard.utils.pandas import (
     calc_groupby_pct_chg,
     pivot_pct_chg_tbl,
 )
-
-from .utils.line_plots import _mk_line_plot
-
-from inflation_dashboard import inflation_long_df, cpi_series_column_name
-
+from inflation_dashboard.utils.plotly import _mk_line_plot
 
 mtm_pct_chg_df = calc_groupby_pct_chg(
     df=inflation_long_df,

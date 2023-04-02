@@ -1,7 +1,8 @@
-import pyfredapi as pf
 from functools import lru_cache
-from dotenv import load_dotenv as _load_dotenv
 from typing import List
+
+import pyfredapi as pf
+from dotenv import load_dotenv as _load_dotenv
 
 _load_dotenv()
 

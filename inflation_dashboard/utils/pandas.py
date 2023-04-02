@@ -224,6 +224,18 @@ def display_pct_chg_df(df: pd.DataFrame, title: str) -> None:
     )
 
 
+def _get_subset_long_cpi_data(
+    long_df: pd.DataFrame,
+    series: Union[List[str], None] = None,
+) -> pd.DataFrame:
+    """Get a subset of the CPI series in the CPI series collection."""
+
+    if series:
+        long_df = long_df[long_df["cpi_series"].isin(series)]
+
+    return long_df
+
+
 def walkback_to_nearest_date(df, date) -> str:
     """Take a pandas dataframe and returns the date on of before the given date."""
     date_list = [date.to_pydatetime() for date in df.date.tolist()]

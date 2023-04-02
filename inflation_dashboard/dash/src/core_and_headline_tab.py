@@ -3,16 +3,14 @@
 import dash_bootstrap_components as dbc
 from dash import dcc, html
 
+from inflation_dashboard import cpi_series_column_name, inflation_long_df
 from inflation_dashboard.utils.pandas import (
+    _get_subset_long_cpi_data,
     calc_groupby_pct_chg,
     get_dates,
     pivot_pct_chg_tbl,
 )
-
-from .utils.line_plots import _mk_line_plot
-from .utils.prep_data import _get_subset_long_cpi_data
-from inflation_dashboard import inflation_long_df, cpi_series_column_name
-
+from inflation_dashboard.utils.plotly import _mk_line_plot
 
 core_and_headline_series = ["All items", "All items less food and energy"]
 

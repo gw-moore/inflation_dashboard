@@ -3,8 +3,8 @@ import pandas as pd
 import plotly.express as px
 from dash import dcc, html
 
-from inflation_dashboard.utils.pandas import calc_groupby_pct_chg, get_dates
 from inflation_dashboard import inflation_long_df
+from inflation_dashboard.utils.pandas import calc_groupby_pct_chg, get_dates
 
 dates = get_dates(inflation_long_df, "date")
 cpi_series_column_name = "cpi_series"

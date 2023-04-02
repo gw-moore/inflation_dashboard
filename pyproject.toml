@@ -30,6 +30,5 @@ requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.ruff]
-# Enable pycodestyle (`E`) and Pyflakes (`F`) codes by default.
-select = ["E", "F"]
+select = ["E", "F", "I", "B", "NPY", "C90", "N"]
 ignore = ["E501"]
