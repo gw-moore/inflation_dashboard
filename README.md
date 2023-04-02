@@ -6,15 +6,19 @@ Dashboard of American Inflation Data.
 
 - Set your FRED API key in a `.env` file
 
-## Launch dashboards
+```
+FRED_API_KEY="your-api-key"
+```
+
+## Launch Dashboard
 
 ### Dash Dashboard
 
 Launch the dashboard with Docker
 
 ```bash
-docker build -t dash_inflation_app -f dash_app.Dockerfile .
-docker run -p 8050:8050 dash_inflation_app
+❯ docker build -t dash_inflation_app -f dash_app.Dockerfile .
+❯ docker run -p 8050:8050 dash_inflation_app
 ```
 
 Launch the dashboard directly with Python
