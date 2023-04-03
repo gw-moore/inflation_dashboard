@@ -79,9 +79,11 @@ overview_content = dbc.Container(
         html.Hr(),
         html.H3(f"Latest CPI Data: {dates.max}"),
         html.H2(
-            f"Year over Year Headline Inflation: {round((yoy_headline_inflation*100),2)}%"
+            f"Year over year Headline Inflation: {round((yoy_headline_inflation*100),2)}%"
         ),
-        html.H2(f"Core Inflation: {round((mtm_headline_inflation*100),2)}%"),
+        html.H2(
+            f"Month over month Headline Inflation: {round((mtm_headline_inflation*100),2)}%"
+        ),
         html.Br(),
         dcc.Markdown(
             """
