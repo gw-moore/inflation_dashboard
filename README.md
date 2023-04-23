@@ -1,6 +1,10 @@
 # Inflation Dashboard
 
-Dashboard of American Inflation Data.
+Example dashboards of American Inflation Data.
+
+This project is exploration of different dashboarding tools in the Python ecosystem.
+
+The data used is the U.S. Consumer Price Index published by the Bureau of Labor Statistic. The data is sourced Federal Reserve Economic Data (FRED) API with the [pyfredapi](https://github.com/gw-moore/pyfredapi) package.
 
 ## Setup
 
@@ -12,25 +16,30 @@ FRED_API_KEY="your-api-key"
 
 ## Launch Dashboard
 
-### Dash Dashboard
-
-Launch the dashboard with Docker
-
-```bash
-❯ docker build -t dash_inflation_app -f dash_app.Dockerfile .
-❯ docker run -p 8050:8050 dash_inflation_app
-```
-
-Launch the dashboard with Python
-
-```bash
-❯ python inflation_dashboard/dash/app.py
-```
-
 ### Streamlit Dashboard
 
 Launch the dashboard with Streamlit
 
 ```bash
 > streamlit run inflation_dashboard/streamlit/app.py
+```
+
+### Dash Dashboard
+
+Launch the dashboard with Docker
+
+```bash
+❯ docker build -t dash_cpi_app -f dash_cpi_app.Dockerfile .
+❯ docker run -p 8051:8051 dash_inflation_app
+```
+
+Launch the dashboard with Python
+
+```bash
+❯ docker build -t streamlit_cpi_app -f streamlit_cpi_app.Dockerfile .
+❯ docker run -p 8053:8053 streamlit_cpi_app
+
+```
+```bash
+❯ python inflation_dashboard/dash/app.py
 ```

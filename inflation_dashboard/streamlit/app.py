@@ -12,9 +12,9 @@ from inflation_dashboard.utils.pandas import (
 )
 from inflation_dashboard.utils.plotly import _mk_line_plot
 
-PLOT_SIZE = {"height": 600, "width": 950}
+PLOT_SIZE = {"height": 800, "width": 1100}
 
-st.set_page_config(layout="wide")
+# st.set_page_config(layout="wide")
 
 options = inflation_long_df[cpi_series_column_name].unique()
 option = st.sidebar.multiselect(
