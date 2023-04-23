@@ -24,22 +24,25 @@ Launch the dashboard with Streamlit
 > streamlit run inflation_dashboard/streamlit/app.py
 ```
 
+Launch the dashboard with Docker
+
+```bash
+❯ docker build -t streamlit_cpi_app -f streamlit_cpi_app.Dockerfile .
+❯ docker run -p 8053:8053 streamlit_cpi_app
+```
+
+
 ### Dash Dashboard
+
+Launch the dashboard with Python
+
+```bash
+❯ python inflation_dashboard/dash/app.py
+```
 
 Launch the dashboard with Docker
 
 ```bash
 ❯ docker build -t dash_cpi_app -f dash_cpi_app.Dockerfile .
 ❯ docker run -p 8051:8051 dash_inflation_app
-```
-
-Launch the dashboard with Python
-
-```bash
-❯ docker build -t streamlit_cpi_app -f streamlit_cpi_app.Dockerfile .
-❯ docker run -p 8053:8053 streamlit_cpi_app
-
-```
-```bash
-❯ python inflation_dashboard/dash/app.py
 ```
