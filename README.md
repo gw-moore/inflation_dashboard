@@ -6,6 +6,8 @@ This project is exploration of different dashboarding tools in the Python ecosys
 
 The data used is the U.S. Consumer Price Index published by the Bureau of Labor Statistic. The data is sourced Federal Reserve Economic Data (FRED) API with the [pyfredapi](https://github.com/gw-moore/pyfredapi) package.
 
+![alt text](_static/streamlit_example.png)
+
 ## Setup
 
 - Set your FRED API key in a `.env` file

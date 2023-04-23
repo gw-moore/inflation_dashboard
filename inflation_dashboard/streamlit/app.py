@@ -12,33 +12,38 @@ from inflation_dashboard.utils.pandas import (
 )
 from inflation_dashboard.utils.plotly import _mk_line_plot
 
-PLOT_SIZE = {"height": 800, "width": 1100}
+PLOT_SIZE = {"height": 800, "width": 1400}
 
-# st.set_page_config(layout="wide")
+st.set_page_config(layout="wide")
 
 options = inflation_long_df[cpi_series_column_name].unique()
-option = st.sidebar.multiselect(
-    label="Filter Series:",
-    options=options,
-)
-
-long_df = _get_subset_long_cpi_data(long_df=inflation_long_df, series=option)
-dates = get_dates(long_df, "date")
+dates = get_dates(inflation_long_df, "date")
 
 st.markdown("# U.S. Inflation Dashboard")
-st.markdown(f"### Latest CPI data from the BLS: {dates.max}")
+st.markdown(
+    f"### Latest CPI data from the U.S. Bureau of Labor Statistics: {dates.max}"
+)
 
 ##############
 # Prep Data
 ##############
+barchart_series = st.sidebar.multiselect(
+    label="Filter Series in Bar chart:",
+    options=options,
+)
+
+bar_chart_long_df = _get_subset_long_cpi_data(
+    long_df=inflation_long_df, series=barchart_series
+)
+
 mtm_pct_chg_df = calc_groupby_pct_chg(
-    df=long_df,
+    df=bar_chart_long_df,
     by=cpi_series_column_name,
     periods=1,
 ).dropna()
 
 yty_pct_chg_df = calc_groupby_pct_chg(
-    df=long_df,
+    df=bar_chart_long_df,
     by=cpi_series_column_name,
     periods=12,
 ).dropna()
@@ -79,24 +84,34 @@ bar_plot = px.bar(
 )
 bar_plot.layout.yaxis.tickformat = ",.0%"
 bar_plot.update_layout(
-    title_text=f"1 & 12 Month Percent Change, U.S. Consumer Price Index for All Urban Consumers, {dates.max}",
+    title_text=f"U.S. Consumer Price Index for All Urban Consumers, 1 & 12 Month Percent Change, {dates.max}",
 )
 st.plotly_chart(bar_plot)
 
 ##############
 # Line Plots
 ##############
-mtm_line_plot = _mk_line_plot(
-    df=mtm_pct_chg_df,
-    title="U.S. CPI for All Urban Consumers, 1-Month Percent Change",
-    plot_size=PLOT_SIZE,
+lineplot_series = st.sidebar.multiselect(
+    label="Filter Series in Line chart:",
+    options=options,
+    default="All items",
 )
+
+lineplot_df = _get_subset_long_cpi_data(
+    long_df=inflation_long_df, series=lineplot_series
+)
+
+lineplot_df = calc_groupby_pct_chg(
+    df=lineplot_df,
+    by=cpi_series_column_name,
+    periods=12,
+).dropna()
 
 yty_line_plot = _mk_line_plot(
-    df=yty_pct_chg_df,
-    title="U.S. CPI for All Urban Consumers, 12-Month Percent Change",
+    df=lineplot_df,
+    title=f"U.S. CPI for All Urban Consumers, 12-Month Percent Change, {dates.min} - {dates.max}",
     plot_size=PLOT_SIZE,
 )
 
-st.plotly_chart(mtm_line_plot)
+# st.plotly_chart(mtm_line_plot)
 st.plotly_chart(yty_line_plot)
