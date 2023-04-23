@@ -132,5 +132,7 @@ dmypy.json
 # vscode
 .vscode/
 
-# notes
+# pycharm
+.idea/
+
 notes.md

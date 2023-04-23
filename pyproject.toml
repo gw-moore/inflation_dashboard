@@ -1,33 +1,47 @@
-[tool.poetry]
-name = "inflation-dashboard"
-version = "0.1.0"
-description = "Dashboard of American Inflation Data"
-authors = ["gw-moore <gwmoore.career@gmail.com>"]
-license = "MIT"
-readme = "README.md"
-packages = [{include = "inflation_dashboard"}]
-
-[tool.poetry.dependencies]
-python = "^3.11,<4.0"
-dash = "^2.9.2"
-plotly = "^5.14.0"
-dash-bootstrap-components = "^1.4.1"
-rich = "^13.3.3"
-pyfredapi = "^0.5.3"
-ipython = "^8.12.0"
-python-dotenv = "^1.0.0"
-gunicorn = "^20.1.0"
-
-
-[tool.poetry.group.dev.dependencies]
-black = "^23.3.0"
-ruff = "^0.0.260"
-pre-commit = "^3.2.1"
-jupyter = "^1.0.0"
-
 [build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+requires = ["hatchling>=1.14.0"]
+build-backend = "hatchling.build"
+
+[project]
+name = "inflation-dashboard"
+description = "Dashboard of American Inflation Data"
+requires-python = ">=3.8,<4.0"
+license = {text = "MIT"}
+# license = "MIT"
+authors = [
+    {name = "gw-moore", email = "gwmoore.career@gmail.com"},
+]
+dependencies = [
+    "dash<3.0.0,>=2.9.2",
+    "plotly<6.0.0,>=5.14.0",
+    "dash-bootstrap-components<2.0.0,>=1.4.1",
+    "rich<14.0.0,>=13.3.3",
+    "pyfredapi>=0.6.0",
+    "ipython<9.0.0,>=8.12.0",
+    "python-dotenv<2.0.0,>=1.0.0",
+    "gunicorn<21.0.0,>=20.1.0",
+    "streamlit>=1.21.0",
+    "watchdog==3.0.0"
+]
+readme = "README.md"
+dynamic = ["version"]
+
+[tool.hatch.version]
+path = "inflation_dashboard/__about__.py"
+
+[project.urls]
+Source = "https://github.com/gw-moore/inflation_dashboard"
+
+[project.optional-dependencies]
+dev = [
+    "jupyter==1.0.0",
+    "black[jupyter]==23.3.0",
+    "pre-commit==3.2.1",
+    "ruff==0.0.260",
+    "mypy==1.1.1",
+    "types-setuptools==67.6.0.6",
+    "pandas-stubs==1.5.3.230321",
+]
 
 [tool.ruff]
 select = ["E", "F", "I", "B", "NPY", "C90", "N"]

@@ -13,6 +13,7 @@ from inflation_dashboard.utils.pandas import (
 from inflation_dashboard.utils.plotly import _mk_line_plot
 
 core_and_headline_series = ["All items", "All items less food and energy"]
+category = "Core & Headline"
 
 long_df = _get_subset_long_cpi_data(
     long_df=inflation_long_df, series=core_and_headline_series
@@ -33,8 +34,14 @@ mtm_pct_chg_pivot_tbl = pivot_pct_chg_tbl(
     pct_chg_col="pct_chg_value",
 )
 
-mtm_line_plot, yty_line_plot = _mk_line_plot(
-    mtm_pct_chg_df, yty_pct_chg_df, category="Core & Headline"
+mtm_line_plot = _mk_line_plot(
+    df=mtm_pct_chg_df,
+    title=f"CPI for All Urban Consumers, {category} 1-Month Percent Change",
+)
+
+yty_line_plot = _mk_line_plot(
+    df=yty_pct_chg_df,
+    title=f"CPI for All Urban Consumers, {category} 12-Month Percent Change",
 )
 
 

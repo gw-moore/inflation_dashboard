@@ -21,8 +21,16 @@ Launch the dashboard with Docker
 ❯ docker run -p 8050:8050 dash_inflation_app
 ```
 
-Launch the dashboard directly with Python
+Launch the dashboard with Python
 
 ```bash
 ❯ python inflation_dashboard/dash/app.py
+```
+
+### Streamlit Dashboard
+
+Launch the dashboard with Streamlit
+
+```bash
+> streamlit run inflation_dashboard/streamlit/app.py
 ```

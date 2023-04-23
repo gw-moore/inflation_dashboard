@@ -11,6 +11,7 @@ from inflation_dashboard.utils.pandas import (
 )
 from inflation_dashboard.utils.plotly import _mk_line_plot
 
+category = "Medical"
 medical_series = [
     "Medical care",
     "Medical care commodities",
@@ -36,8 +37,14 @@ mtm_pct_chg_pivot_tbl = pivot_pct_chg_tbl(
     pct_chg_col="pct_chg_value",
 )
 
-mtm_line_plot, yty_line_plot = _mk_line_plot(
-    mtm_pct_chg_df, yty_pct_chg_df, category="Medical"
+mtm_line_plot = _mk_line_plot(
+    df=mtm_pct_chg_df,
+    title=f"CPI for All Urban Consumers, {category} 1-Month Percent Change",
+)
+
+yty_line_plot = _mk_line_plot(
+    df=yty_pct_chg_df,
+    title=f"CPI for All Urban Consumers, {category} 12-Month Percent Change",
 )
 
 month_over_month_tab_content = dbc.Card(

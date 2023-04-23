@@ -226,9 +226,12 @@ def display_pct_chg_df(df: pd.DataFrame, title: str) -> None:
 
 def _get_subset_long_cpi_data(
     long_df: pd.DataFrame,
-    series: Union[List[str], None] = None,
+    series: Union[List[str], str, None] = None,
 ) -> pd.DataFrame:
     """Get a subset of the CPI series in the CPI series collection."""
+
+    if isinstance(series, str):
+        series = [series]
 
     if series:
         long_df = long_df[long_df["cpi_series"].isin(series)]

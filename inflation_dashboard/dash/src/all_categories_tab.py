@@ -28,8 +28,14 @@ mtm_pct_chg_pivot_tbl = pivot_pct_chg_tbl(
     pct_chg_col="pct_chg_value",
 )
 
-mtm_line_plot, yty_line_plot = _mk_line_plot(
-    mtm_pct_chg_df, yty_pct_chg_df, category="All Categories"
+mtm_line_plot = _mk_line_plot(
+    df=mtm_pct_chg_df,
+    title="CPI for All Urban Consumers, All Categories 1-Month Percent Change",
+)
+
+yty_line_plot = _mk_line_plot(
+    df=yty_pct_chg_df,
+    title="CPI for All Urban Consumers, All Categories 12-Month Percent Change",
 )
 
 month_over_month_tab_content = dbc.Card(
