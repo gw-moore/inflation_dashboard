@@ -4,7 +4,7 @@ This project is exploration of different dashboard tools in the Python ecosystem
 
 The data used is the U.S. Consumer Price Index published by the Bureau of Labor Statistic. The data is sourced Federal Reserve Economic Data (FRED) API with the [pyfredapi](https://github.com/gw-moore/pyfredapi) package.
 
-![alt text](_static/streamlit_example.png)
+![streamlit_example](_static/streamlit_example.png)
 *Streamlit Dashboard*
 
 ## Setup
