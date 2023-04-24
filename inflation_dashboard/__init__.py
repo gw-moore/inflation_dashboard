@@ -2,9 +2,28 @@ from functools import lru_cache
 from typing import List
 
 import pyfredapi as pf
-from dotenv import load_dotenv as _load_dotenv
+import streamlit as st
 
-_load_dotenv()
+
+def add_sidebar_title():
+    st.markdown(
+        """
+        <style>
+            [data-testid="stSidebarNav"]::before {
+                content: "U.S. Inflation Dashboard";
+                margin-left: 20px;
+                margin-top: 20px;
+                font-size: 30px;
+                position: relative;
+                top: 50px;
+            }
+        </style>
+        """,
+        unsafe_allow_html=True,
+    )
+
+
+all_cpi_series = pf.get_category_series("9")
 
 cpi_series_column_name = "cpi_series"
 cpi_series = [
@@ -16,6 +35,7 @@ cpi_series = [
     "CUSR0000SETB01",
     "CUUR0000SEHE",
     "CUSR0000SEHF",
+    "CUSR0000SACE",
     "CUSR0000SEHF01",
     "CUSR0000SEHF02",
     "CPILFESL",

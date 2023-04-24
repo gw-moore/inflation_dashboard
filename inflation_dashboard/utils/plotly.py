@@ -34,7 +34,7 @@ def _mk_line_plot(
     Figure
     """
     if plot_size is None:
-        plot_size = {}
+        plot_size = {"height": 800, "width": 1400}
     plot = px.line(
         data_frame=df,
         x="date",

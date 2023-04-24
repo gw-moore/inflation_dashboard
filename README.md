@@ -22,7 +22,7 @@ FRED_API_KEY="your-api-key"
 Launch the dashboard with Streamlit
 
 ```bash
-streamlit run inflation_dashboard/streamlit/app.py
+streamlit run inflation_dashboard/streamlit/CPI_All_Urban_Consumers.py
 ```
 
 Launch the dashboard with Docker

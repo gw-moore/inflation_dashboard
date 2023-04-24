@@ -4,7 +4,11 @@ import pandas as pd
 import plotly.express as px
 import streamlit as st
 
-from inflation_dashboard import cpi_series_column_name, inflation_long_df
+from inflation_dashboard import (
+    add_sidebar_title,
+    cpi_series_column_name,
+    inflation_long_df,
+)
 from inflation_dashboard.utils.pandas import (
     _get_subset_long_cpi_data,
     calc_groupby_pct_chg,
@@ -12,11 +16,12 @@ from inflation_dashboard.utils.pandas import (
 )
 from inflation_dashboard.utils.plotly import _mk_line_plot
 
+st.set_page_config(layout="wide", page_title="U.S. CPI", page_icon=":dollar:")
 PLOT_SIZE = {"height": 800, "width": 1400}
 
-st.set_page_config(layout="wide")
+add_sidebar_title()
 
-options = inflation_long_df[cpi_series_column_name].unique()
+options = sorted(inflation_long_df[cpi_series_column_name].unique())
 dates = get_dates(inflation_long_df, "date")
 
 st.markdown("# U.S. Inflation Dashboard")

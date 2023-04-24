@@ -45,4 +45,4 @@ dev = [
 
 [tool.ruff]
 select = ["E", "F", "I", "B", "NPY", "C90", "N"]
-ignore = ["E501"]
+ignore = ["E501", "N999"]
