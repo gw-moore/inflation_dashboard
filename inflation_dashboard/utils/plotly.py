@@ -12,6 +12,7 @@ def _mk_line_plot(
     title: str,
     series_column_name: str = "cpi_series",
     plot_size: Dict[str, int] | None = None,
+    **kwargs,
 ) -> Figure:
     """Create plotly line graph for CPI Series.
 
@@ -46,6 +47,7 @@ def _mk_line_plot(
         hover_data={"pct_chg_value": ":.2%"},
         color_discrete_sequence=px.colors.qualitative.Safe,
         **plot_size,
+        **kwargs,
     )
     plot.layout.yaxis.tickformat = ",.2%"
 

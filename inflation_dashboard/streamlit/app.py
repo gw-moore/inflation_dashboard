@@ -24,6 +24,51 @@ st.markdown(
     f"### Latest CPI data from the U.S. Bureau of Labor Statistics: {dates.max}"
 )
 
+####################
+# Headline Numbers
+####################
+col1, col2 = st.columns(2, gap="small")
+
+headline_long_df = _get_subset_long_cpi_data(
+    long_df=inflation_long_df, series="All items"
+)
+
+core_mtm_pct_chg_df = calc_groupby_pct_chg(
+    df=headline_long_df,
+    by=cpi_series_column_name,
+    periods=1,
+).dropna()
+latest_core_mtm_pct_chg = core_mtm_pct_chg_df["pct_chg_value"].iloc[-1]
+mtm_delta = round(
+    latest_core_mtm_pct_chg - core_mtm_pct_chg_df["pct_chg_value"].iloc[-2]
+)
+
+with col1:
+    st.metric(
+        label="CPI All Items - 1 Month Percent Change",
+        value=round(latest_core_mtm_pct_chg * 100, 2),
+        delta=mtm_delta,
+        delta_color="off" if mtm_delta == 0 else "inverse",
+    )
+
+core_yty_pct_chg_df = calc_groupby_pct_chg(
+    df=headline_long_df,
+    by=cpi_series_column_name,
+    periods=12,
+).dropna()
+latest_core_yty_pct_chg = core_yty_pct_chg_df["pct_chg_value"].iloc[-1]
+yty_delta = round(
+    latest_core_yty_pct_chg - core_yty_pct_chg_df["pct_chg_value"].iloc[-2], 4
+)
+
+with col2:
+    st.metric(
+        label="CPI All Items - 12 Month Percent Change",
+        value=round(latest_core_yty_pct_chg * 100, 2),
+        delta=yty_delta,
+        delta_color="off" if yty_delta == 0 else "inverse",
+    )
+
 ##############
 # Prep Data
 ##############
@@ -96,16 +141,34 @@ lineplot_series = st.sidebar.multiselect(
     options=options,
     default="All items",
 )
+# mtm = st.sidebar.checkbox("Month-to-Month Percent Change", value=True, key="mtm")
+# yty = st.sidebar.checkbox("Year-to-Year Percent Change", value=True, key="yty")
 
 lineplot_df = _get_subset_long_cpi_data(
     long_df=inflation_long_df, series=lineplot_series
 )
 
-lineplot_df = calc_groupby_pct_chg(
+mtm_lineplot_df = calc_groupby_pct_chg(
+    df=lineplot_df,
+    by=cpi_series_column_name,
+    periods=1,
+).dropna()
+mtm_lineplot_df["type"] = "month-to-month"
+
+yty_lineplot_df = calc_groupby_pct_chg(
     df=lineplot_df,
     by=cpi_series_column_name,
     periods=12,
 ).dropna()
+yty_lineplot_df["type"] = "year-to-year"
+lineplot_df = yty_lineplot_df
+
+# if mtm and yty:
+#     lineplot_df = pd.concat([mtm_lineplot_df, yty_lineplot_df])
+# elif mtm:
+#     lineplot_df = mtm_lineplot_df
+# elif yty:
+#     lineplot_df = yty_lineplot_df
 
 yty_line_plot = _mk_line_plot(
     df=lineplot_df,
