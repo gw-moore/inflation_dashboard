@@ -24,6 +24,7 @@ def add_sidebar_title():
 
 
 all_cpi_series = pf.get_category_series("9")
+all_personal_income_and_outlays_series = pf.get_category_series("110")
 
 cpi_series_column_name = "cpi_series"
 cpi_series = [
@@ -63,20 +64,6 @@ def _parse_cpi_series_title(title: str) -> str:
     )
 
 
-inflation_sc = pf.SeriesCollection()
-
-
-@lru_cache(maxsize=512)
-def setup_inflation_sc(
-    series_collection: pf.SeriesCollection = inflation_sc,
-    inflation_series: List[str] = cpi_series,
-    title_parser: callable = _parse_cpi_series_title,
-):
-    series_collection.add_series(series_ids=inflation_series, rename=title_parser)
-    return series_collection
-
-
-_ = setup_inflation_sc()
-
+inflation_sc = pf.SeriesCollection(series_id=cpi_series, rename=_parse_cpi_series_title)
 inflation_long_df = inflation_sc.merge_long(col_name=cpi_series_column_name)
 inflation_wide_df = inflation_sc.merge_asof(base_series_id="CPIAUCSL")

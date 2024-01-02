@@ -102,6 +102,7 @@ yty_pct_chg_df = calc_groupby_pct_chg(
 # Bar Plot
 ##############
 
+
 mtm_bp_df = (
     mtm_pct_chg_df.groupby(cpi_series_column_name).tail(1).copy().reset_index(drop=True)
 )
@@ -146,19 +147,14 @@ lineplot_series = st.sidebar.multiselect(
     options=options,
     default="All items",
 )
-# mtm = st.sidebar.checkbox("Month-to-Month Percent Change", value=True, key="mtm")
-# yty = st.sidebar.checkbox("Year-to-Year Percent Change", value=True, key="yty")
 
 lineplot_df = _get_subset_long_cpi_data(
     long_df=inflation_long_df, series=lineplot_series
 )
 
-mtm_lineplot_df = calc_groupby_pct_chg(
-    df=lineplot_df,
-    by=cpi_series_column_name,
-    periods=1,
-).dropna()
-mtm_lineplot_df["type"] = "month-to-month"
+yty_tab, mtm_tab = st.tabs(["Month-to-Month", "Year-to-Year"])
+
+# Year-to-Year Percent Change tab
 
 yty_lineplot_df = calc_groupby_pct_chg(
     df=lineplot_df,
@@ -166,20 +162,29 @@ yty_lineplot_df = calc_groupby_pct_chg(
     periods=12,
 ).dropna()
 yty_lineplot_df["type"] = "year-to-year"
-lineplot_df = yty_lineplot_df
-
-# if mtm and yty:
-#     lineplot_df = pd.concat([mtm_lineplot_df, yty_lineplot_df])
-# elif mtm:
-#     lineplot_df = mtm_lineplot_df
-# elif yty:
-#     lineplot_df = yty_lineplot_df
 
 yty_line_plot = _mk_line_plot(
-    df=lineplot_df,
+    df=yty_lineplot_df,
     title=f"U.S. CPI for All Urban Consumers, 12-Month Percent Change, {dates.min} - {dates.max}",
     plot_size=PLOT_SIZE,
 )
 
-# st.plotly_chart(mtm_line_plot)
-st.plotly_chart(yty_line_plot)
+yty_tab.subheader("Year-to-Year Percent Change")
+yty_tab.plotly_chart(yty_line_plot)
+
+# Month-to-month Percent Change tab
+
+mtm_lineplot_df = calc_groupby_pct_chg(
+    df=lineplot_df,
+    by=cpi_series_column_name,
+    periods=1,
+).dropna()
+
+mtm_line_plot = _mk_line_plot(
+    df=mtm_lineplot_df,
+    title=f"U.S. CPI for All Urban Consumers, 12-Month Percent Change, {dates.min} - {dates.max}",
+    plot_size=PLOT_SIZE,
+)
+
+mtm_tab.subheader("Month-to-Month Percent Change")
+mtm_tab.plotly_chart(mtm_line_plot)

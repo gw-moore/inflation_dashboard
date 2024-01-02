@@ -24,7 +24,15 @@ for series_info in special_indexes.values():
         sticky_indexes.append(series_info)
 
 
-st.markdown(sticky_indexes[0].notes)
+# st.markdown(sticky_indexes[0].notes)
+
+st.markdown(
+    """The Personal Consumption Expenditures Price Index is a measure of the prices that people living in the United States, or those buying on their behalf, pay for goods and services. The change in the PCE price index is known for capturing inflation (or deflation) across a wide range of consumer expenses and reflecting changes in consumer behavior. For example, if the price of beef rises, shoppers may buy less beef and more chicken.
+
+The PCE Price Index is produced by the Bureau of Economic Analysis (BEA), which revises previously published PCE data to reflect updated information or new methodology, providing consistency across decades of data that's valuable for researchers. The PCE price index is used primarily for macroeconomic analysis and forecasting.
+
+The PCE Price index is the Federal Reserve’s preferred measure of inflation. The PCE Price Index is similar to the Bureau of Labor Statistics' consumer price index for urban consumers. The two indexes, which have their own purposes and uses, are constructed differently, resulting in different inflation rates."""
+)
 
 sc = pf.SeriesCollection()
 
