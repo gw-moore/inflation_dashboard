@@ -34,16 +34,12 @@ The PCE Price Index is produced by the Bureau of Economic Analysis (BEA), which 
 The PCE Price index is the Federal Reserve’s preferred measure of inflation. The PCE Price Index is similar to the Bureau of Labor Statistics' consumer price index for urban consumers. The two indexes, which have their own purposes and uses, are constructed differently, resulting in different inflation rates."""
 )
 
-sc = pf.SeriesCollection()
+sc = pf.SeriesCollection(series_id=[si.id for si in sticky_indexes])
 
 
 def _parse_cpi_series_title(title: str) -> str:
     """Function to parse a sticky CPI series title into a human readable label."""
     return title
-
-
-for series_info in sticky_indexes:
-    sc.add_series(series_info.id, rename=_parse_cpi_series_title)
 
 
 sticky_long_df = sc.merge_long(col_name=cpi_series_column_name)

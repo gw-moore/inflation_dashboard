@@ -22,10 +22,7 @@ main_series = [s for s in pci_series if s.id == "PCEPI"][0]
 st.markdown(main_series.notes)
 
 
-sc = pf.SeriesCollection()
-
-for series_info in pci_series:
-    sc.add_series(series_info.id)
+sc = pf.SeriesCollection(series_id=[si.id for si in pci_series])
 
 pci_long_df = sc.merge_long(col_name=series_column_name)
 dates = get_dates(pci_long_df, "date")

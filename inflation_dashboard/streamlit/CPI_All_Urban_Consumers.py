@@ -152,7 +152,7 @@ lineplot_df = _get_subset_long_cpi_data(
     long_df=inflation_long_df, series=lineplot_series
 )
 
-yty_tab, mtm_tab = st.tabs(["Month-to-Month", "Year-to-Year"])
+yty_tab, mtm_tab= st.tabs(["Year-to-Year", "Month-to-Month"])
 
 # Year-to-Year Percent Change tab
 
